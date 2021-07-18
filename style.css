@@ -37,8 +37,12 @@ body {
 }
 
 .display {
-   width: 100%;
+   width: 95%;
    color: lightgray;
+}
+
+.calc {
+    margin-right: 2px;
 }
 
 .buttons {
@@ -53,12 +57,14 @@ body {
     border-radius: 50%;
     border: none;
     margin: auto;
-    font-size: 20px;
+    font-size: 25px;
     box-shadow: 2px 2px black;
+    background-color: lightgray
 }
 
 .btn:hover {
     opacity: 0.5;
+    box-shadow: 2px 1px black;
 }
 
 .divide, .multiply, .subtract, .add, .equals, .backspace {
