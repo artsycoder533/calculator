@@ -102,7 +102,10 @@ btnClear.addEventListener('click', () => {
 //FUNCTIONS
 //add
 function add(a, b){
-    return a + b;
+    let result = parseInt(a) + parseInt(b);
+    calc.length = 0;
+    calc.push(result);
+    return calc[0];
 }
 
 //subtract
@@ -130,7 +133,10 @@ function operate(arr){
     let y = arr[2];
     switch (operator){
         case "+" :
-            return add(x, y);
+            displayString = add(x, y);
+            console.log(displayString);
+            keyPressedDisplay.textContent = `${displayString}`;
+            //update display string with result
             break;
         case "-" :
             return subtract(x, y);
@@ -166,8 +172,10 @@ function populateDisplay(num){
             console.log(calc);
             break;
         case "=":
+            calc.push(displayString);
+            console.log(`display string= ${displayString}`);
+            console.log(calc);
             operate(calc);
-            
             break;
         default:
             //if button pressed is a digit
@@ -175,7 +183,6 @@ function populateDisplay(num){
             //displays the current digits pressed at the bottom of the display
             displayExpression += num;
             displayString += num;
-            calc.push(displayString);
             expressionDisplay.textContent = `${displayExpression}`;
             keyPressedDisplay.textContent = `${displayString}`;
     }    
