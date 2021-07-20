@@ -33,6 +33,7 @@ body {
     text-align: right;
     height: 100px;
     background-color: black;
+    box-shadow: inset 2px 2px 2px 2px darkgray;
     width: 100%;
 }
 
@@ -58,7 +59,7 @@ body {
     border: none;
     margin: auto;
     font-size: 25px;
-    box-shadow: 2px 2px black;
+    box-shadow: inset 2px 2px 2px 2px darkgray;
     background-color: lightgray
 }
 
@@ -69,10 +70,12 @@ body {
 
 .divide, .multiply, .subtract, .add, .equals, .backspace {
     background-color: gold;
+    box-shadow: inset 2px 2px 2px 2px goldenrod;
 }
 
 .clear, .negative, .percent {
     background-color: lightseagreen;
+    box-shadow: inset 2px 2px 2px 2px seagreen;
 }
 
 footer p {

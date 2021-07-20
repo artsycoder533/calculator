@@ -77,7 +77,7 @@ btnSubtract.addEventListener('click', () => {
 });
 
 btnMultiply.addEventListener('click', () => {
-    populateDisplay('x');
+    populateDisplay('*');
 });
 
 btnDivide.addEventListener('click', () => {
@@ -110,12 +110,18 @@ function add(a, b){
 
 //subtract
 function subtract(a, b){
-    return a - b;
+    let result = parseInt(a) - parseInt(b);
+    calc.length = 0;
+    calc.push(result);
+    return calc[0];
 }
 
 //multiply
 function multiply(a, b){
-    return a * b;
+    let result = parseInt(a) * parseInt(b);
+    calc.length = 0;
+    calc.push(result);
+    return calc[0];
 }
 
 //divide
@@ -123,7 +129,10 @@ function divide(a, b){
     if(b === 0){
         return 'ERROR';
     }
-    return a / b;
+    let result = parseInt(a) / parseInt(b);
+    calc.length = 0;
+    calc.push(result);
+    return calc[0];
 }
 
 //operate
@@ -134,7 +143,7 @@ function operate(arr){
     switch (operator){
         case "+" :
             displayString = add(x, y);
-            console.log(displayString);
+            console.log("display string = " + displayString);
             keyPressedDisplay.textContent = `${displayString}`;
             //update display string with result
             break;
@@ -173,9 +182,12 @@ function populateDisplay(num){
             break;
         case "=":
             calc.push(displayString);
-            console.log(`display string= ${displayString}`);
             console.log(calc);
             operate(calc);
+            displayExpression = "";
+            expressionDisplay.textContent = `${displayExpression}`;
+            displayString = "";
+            //keyPressedDisplay.textContent = `${displayString}`; 
             break;
         default:
             //if button pressed is a digit
