@@ -249,7 +249,11 @@ function populateDisplay(input) {
             // push the operator to calc array
 			calc.push(op);
 			break;
-		case "=":
+        case "=":
+            calc.push(displayString);
+            console.log("calc[0] is: " + calc[0]);
+            console.log("calc[1] is: " + calc[1]);
+            console.log("calc[2] is: " + calc[2]);
 			operate(calc[0], calc[1], calc[2]);
             break;
         case ".":
