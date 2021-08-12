@@ -31,7 +31,7 @@ const btnClear = document.querySelector(`.clear`);
 
 //EVENT LISTENERS - DIGITS
 btnOne.addEventListener('click', () => {
-    populateDisplay('1');
+    populateDisplay(1);
 });
 
 btnTwo.addEventListener('click', () => {
@@ -97,6 +97,8 @@ btnClear.addEventListener('click', () => {
     //clear the text content, set displayString back to 0
     expressionDisplay.textContent = "";
     keyPressedDisplay.textContent = "0";
+    // clear the array
+    calc.length = 0;
 });
 
 //FUNCTIONS
@@ -105,6 +107,9 @@ function add(a, b){
     let result = parseInt(a) + parseInt(b);
     calc.length = 0;
     calc.push(result);
+    console.log("in add: " + result);
+    console.log("in add calc is: " + calc);
+	console.log("in add returned: " + calc[0]);
     return calc[0];
 }
 
@@ -113,6 +118,9 @@ function subtract(a, b){
     let result = parseInt(a) - parseInt(b);
     calc.length = 0;
     calc.push(result);
+    console.log("in subtract: " + result);
+    console.log("in subtract calc is: " + calc);
+	console.log("in subtract returned: " + calc[0]);
     return calc[0];
 }
 
@@ -121,7 +129,11 @@ function multiply(a, b){
     let result = parseInt(a) * parseInt(b);
     calc.length = 0;
     calc.push(result);
+    console.log("in multiply: " + result);
+    console.log("in multiply calc is: " + calc);
+    console.log("in multiply returned: " + calc[0]);
     return calc[0];
+    
 }
 
 //divide
@@ -132,45 +144,53 @@ function divide(a, b){
     let result = parseInt(a) / parseInt(b);
     calc.length = 0;
     calc.push(result);
+    console.log("in divide: " + result);
+    console.log("in divide calc is: " + calc);
+	console.log("in divide returned: " + calc[0]);
     return calc[0];
 }
 
 //operate
-function operate(arr){
+function operate(arr) {
+    console.log(arr);
     let x = arr[0];
     let operator = arr[1];
     let y = arr[2];
-    switch (operator){
-        case "+" :
+    switch (operator) {
+        case "+":
             displayString = add(x, y);
-            console.log("display string = " + displayString);
-            keyPressedDisplay.textContent = `${displayString}`;
-            //update display string with result
+            keyPressedDisplay.textContent = displayString;
+            return displayString;
             break;
-        case "-" :
-            return subtract(x, y);
+        case "-":
+            displayString = subtract(x, y);
+            keyPressedDisplay.textContent = displayString;
+			return displayString;
             break;
-        case "*" :
-            return multiply(x, y);
+        case "*":
+            displayString = multiply(x, y);
+            keyPressedDisplay.textContent = displayString;
+			return displayString;
             break;
         case "/":
-            return divide(x, y);
+            displayString = divide(x, y);
+            keyPressedDisplay.textContent = displayString;
+			return displayString;
             break;
         default:
             return x;
     }
 }
 
-
-function populateDisplay(num){
+function populateDisplay(num) {
     let first = '';
     let second = '';
     let op = '';
-    
-    switch (num){
-        case '+' :
-        case '-' :
-        case '*' :
+
+    switch (num) {
+        case '+':
+        case '-':
+        case '*':
         case '/':
             op = num;
             displayExpression += num;
@@ -178,12 +198,11 @@ function populateDisplay(num){
             calc.push(displayString);
             calc.push(num);
             displayString = '';
-            console.log(calc);
             break;
         case "=":
             calc.push(displayString);
             console.log(calc);
-            operate(calc);
+            const result = operate(calc);
             displayExpression = "";
             expressionDisplay.textContent = `${displayExpression}`;
             displayString = "";
@@ -195,10 +214,11 @@ function populateDisplay(num){
             //displays the current digits pressed at the bottom of the display
             displayExpression += num;
             displayString += num;
+            console.log(displayString);
             expressionDisplay.textContent = `${displayExpression}`;
             keyPressedDisplay.textContent = `${displayString}`;
-    }    
-} 
+    }
+}
 
 // add(1, 2);
 // subtract(10, 2);
@@ -209,4 +229,4 @@ function populateDisplay(num){
 // operate(3,3, '*');
 // operate(3,0, '/');
 // operate(9,3, '/');
-// operate(2,3,'$');
+// operate(2,3,'$'); 
