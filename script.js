@@ -113,26 +113,26 @@ btnClear.addEventListener('click', () => {
 });
 
 btnBackspace.addEventListener('click', () => {
-    console.log("backspace clicked");
-    console.log(keyPressedDisplay.textContent.length);
-    console.log(expressionDisplay.textContent.length)
+    // console.log("backspace clicked");
+    // console.log(keyPressedDisplay.textContent.length);
+    // console.log(expressionDisplay.textContent.length)
     //delete one digit from keyPressedDisplay
     // if only one number make key pressed display say 0
     if (keyPressedDisplay.textContent.length === 1 ) {
-        console.log("inside backspace if");
+        // console.log("inside backspace if");
         keyPressedDisplay.textContent = "0";
         expressionDisplay.textContent = expressionDisplay.textContent.slice(0, -1);
         displayString = "";
-        console.log("displayString is inside backspace if: " + displayString);
+        // console.log("displayString is inside backspace if: " + displayString);
 	}
     // if more than one number delete last number added
     else if (keyPressedDisplay.textContent.length > 1) {
         console.log("inside backspace else");
         keyPressedDisplay.textContent = keyPressedDisplay.textContent.slice(0, -1);
         expressionDisplay.textContent = expressionDisplay.textContent.slice(0, -1);
-        console.log("displayString is inside backspace else: " + displayString);
+        // console.log("displayString is inside backspace else: " + displayString);
         displayString = displayString.slice(0, -1);
-        console.log("displayString is inside backspace else: " + displayString);
+        // console.log("displayString is inside backspace else: " + displayString);
     }
 });
 
@@ -265,6 +265,9 @@ function populateDisplay(input) {
             break;
         case ".":
             // check if user already pressed a decimal
+            if (displayString.includes(".")) {
+                break;
+            }
             // displayExpression += input;
             // console.log("last char is: " + displayExpression.charAt(length - 1));
             // if (displayExpression.includes(".")) {
