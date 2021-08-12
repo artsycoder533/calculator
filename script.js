@@ -174,38 +174,6 @@ function operate(num1, op, num2) {
     return result;
 }
 
-
-// function operate(arr) {
-//     console.log(arr);
-//     let x = arr[0];
-//     let operator = arr[1];
-//     let y = arr[2];
-//     switch (operator) {
-//         case "+":
-//             displayString = add(x, y);
-//             keyPressedDisplay.textContent = displayString;
-//             return displayString;
-//             break;
-//         case "-":
-//             displayString = subtract(x, y);
-//             keyPressedDisplay.textContent = displayString;
-// 			return displayString;
-//             break;
-//         case "*":
-//             displayString = multiply(x, y);
-//             keyPressedDisplay.textContent = displayString;
-// 			return displayString;
-//             break;
-//         case "/":
-//             displayString = divide(x, y);
-//             keyPressedDisplay.textContent = displayString;
-// 			return displayString;
-//             break;
-//         default:
-//             return x;
-//     }
-// }
-
 function populateDisplay(input) {
 	let op = "";
 
@@ -238,58 +206,27 @@ function populateDisplay(input) {
 		) {
 			const x = operate(calc[0], calc[1], calc[2]);
 			displayString.textContent = x;
-		}
-    } else if (calc.length === 4 && typeof calc[3] === "string") {
-        
+        }
+    //    
+    }
+    else if (calc.length === 4 && typeof calc[3] === "string") {
+        calc.push(calc[3]);
+        console.log("if continued expression, calc contains: " + calc);
+
+
 	}
 	// if calc[0] is a number and the next number pushed is a number
-	
-    if (typeof calc[0] === "number" && typeof calc[1] === "number") {
+    else if (typeof calc[0] === "number" && typeof calc[1] === "number") {
         // remove the first element(result from previous calculation)
         calc.shift();
         // remove first number from expression Display
         expressionDisplay.textContent = input;
-	}
+    }
+    // else if (dfdf) {
+        
+    // }
 }
 
-// function populateDisplay(num) {
-//     let first = '';
-//     let second = '';
-//     let op = '';
-
-//     switch (num) {
-//         case '+':
-//         case '-':
-//         case '*':
-//         case '/':
-//             op = num;
-//             displayExpression += num;
-//             expressionDisplay.textContent = `${displayExpression}`;
-//             calc.push(displayString);
-//             calc.push(num);
-//             console.log("inside populate Display calc: " + calc + calc.length);
-//             displayString = '';
-//             break;
-//         case "=":
-//             calc.push(displayString);
-//             console.log(calc);
-//             const result = operate(calc);
-//             displayExpression = "";
-//             expressionDisplay.textContent = `${displayExpression}`;
-//             displayString = "";
-//             //keyPressedDisplay.textContent = `${displayString}`; 
-//             break;
-//         default:
-//             //if button pressed is a digit
-//             //displays entire mathematical expression at the top of display
-//             //displays the current digits pressed at the bottom of the display
-//             displayExpression += num;
-//             displayString += num;
-//             console.log(displayString);
-//             expressionDisplay.textContent = `${displayExpression}`;
-//             keyPressedDisplay.textContent = `${displayString}`;
-//     }
-// }
 
 // add(1, 2);
 // subtract(10, 2);
