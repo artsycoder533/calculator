@@ -118,20 +118,19 @@ btnBackspace.addEventListener('click', () => {
     console.log(expressionDisplay.textContent.length)
     //delete one digit from keyPressedDisplay
     // if only one number make key pressed display say 0
-    if (
-			keyPressedDisplay.textContent.length === 1 &&
-			expressionDisplay.textContent.length
-		) {
-			console.log("inside backspace if");
-			keyPressedDisplay.textContent = "0";
-			expressionDisplay.textContent = expressionDisplay.textContent.slice(0, -1);
-		}
-		// if more than one number delete last number added
-		else if (keyPressedDisplay.textContent.length > 1) {
-			console.log("inside backspace else");
-			keyPressedDisplay.textContent = keyPressedDisplay.textContent.slice(0, -1);
-			expressionDisplay.textContent = expressionDisplay.textContent.slice(0, -1);
-		}
+    if (keyPressedDisplay.textContent.length === 1 ) {
+        console.log("inside backspace if");
+        keyPressedDisplay.textContent = "0";
+        expressionDisplay.textContent = expressionDisplay.textContent.slice(0, -1);
+        displayString.slice(0, -1);
+	}
+    // if more than one number delete last number added
+    else if (keyPressedDisplay.textContent.length > 1) {
+        console.log("inside backspace else");
+        keyPressedDisplay.textContent = keyPressedDisplay.textContent.slice(0, -1);
+        expressionDisplay.textContent = expressionDisplay.textContent.slice(0, -1);
+        displayString.slice(0, -1);
+    }
 });
 
 //FUNCTIONS
@@ -170,7 +169,7 @@ function multiply(a, b){
 
 //divide
 function divide(a, b){
-    if(b === 0){
+    if(b == 0){
         return 'ERROR';
     }
     // let result = parseInt(a) / parseInt(b);
@@ -239,19 +238,23 @@ function populateDisplay(input) {
 		case "*":
 		case "/":
             // in calc length is 2 check and 2nd element is already a operator break.
-            if (calc.length === 2 && typeof calc[1] === "string") {
-                break;
-            }
+            // if (calc.length === 2 && typeof calc[1] === "string") {
+            //     break;
+            // }
             // add input to expression string
             displayExpression += input;
             expressionDisplay.textContent += input;
             // push whats in display string so far to calc array for double digit + numbers
             calc.push(displayString);
+            
             // once an operator is pressed clear display string
             displayString = "";
             keyPressedDisplay.textContent = "";
             // push the operator to calc array
-			calc.push(input);
+            calc.push(input);
+            if (calc.indexOf(input) === 3) {
+                calc.shift();
+            }
 			break;
         case "=":
             calc.push(displayString);
@@ -261,9 +264,9 @@ function populateDisplay(input) {
             // check if user already pressed a decimal
             // displayExpression += input;
             console.log("last char is: " + displayExpression.charAt(length - 1));
-            if (displayExpression.includes(".")) {
-                break;
-            }
+            // if (displayExpression.includes(".")) {
+            //     break;
+            // }
             displayExpression += input;
             expressionDisplay.textContent += input;
             // keyPressedDisplay.textContent += input;
@@ -273,6 +276,7 @@ function populateDisplay(input) {
         default:
             expressionDisplay.textContent += input;
             console.log("calc contains: " + calc);
+    
             if (calc.length === 3 && typeof calc[1] === "string") {
                 console.log("i got here");
                 console.log("displayString in 1st if: " + displayString);
@@ -285,6 +289,11 @@ function populateDisplay(input) {
                 console.log("keyPressedDisplay in 2nd if: " + keyPressedDisplay.textContent);
                 keyPressedDisplay.textContent = "";
             }
+
+            else if (calc.length === 4 && typeof calc[1] === "number") {
+                console.log("made it inside shift");
+                calc.shift();
+            }
             displayString += input;
             console.log("displayString is outside of ifs: " + displayString);
             console.log("keyPressedDisplay outside of ifs: " + keyPressedDisplay.textContent);
@@ -293,9 +302,9 @@ function populateDisplay(input) {
             displayExpression += input;
     }
 
-    if (calc.length === 4) {
-        const x = operate(calc[0], calc[1], calc[2]);
-        console.log(calc);
-        // keyPressedDisplay.textContent = "";
-    }
+    // if (calc.length === 4) {
+    //     const x = operate(calc[0], calc[1], calc[2]);
+    //     console.log(calc);
+    //     // keyPressedDisplay.textContent = "";
+    // }
 }
