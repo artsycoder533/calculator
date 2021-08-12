@@ -140,8 +140,6 @@ function add(a, b) {
     console.log("first num: " + a);
     console.log("second num: " + b);
     let result = parseInt(a) + parseInt(b);
-    // calc.length = 0;
-    // calc.push(result);
     console.log("in add: " + result);
     console.log("in add calc is: " + calc);
 	console.log("in add returned: " + result);
@@ -151,8 +149,6 @@ function add(a, b) {
 //subtract
 function subtract(a, b){
     let result = parseInt(a) - parseInt(b);
-    // calc.length = 0;
-    // calc.push(result);
     console.log("in subtract: " + result);
     console.log("in subtract calc is: " + calc);
 	console.log("in subtract returned: " + result);
@@ -162,8 +158,6 @@ function subtract(a, b){
 //multiply
 function multiply(a, b){
     let result = parseInt(a) * parseInt(b);
-    // calc.length = 0;
-    // calc.push(result);
     console.log("in multiply: " + result);
     console.log("in multiply calc is: " + calc);
     console.log("in multiply returned: " + result);
@@ -177,8 +171,6 @@ function divide(a, b){
         return 'ERROR';
     }
     let result = parseInt(a) / parseInt(b);
-    // calc.length = 0;
-    // calc.push(result);
     console.log("in divide: " + result);
     console.log("in divide calc is: " + calc);
 	console.log("in divide returned: " + calc[0]);
@@ -200,12 +192,13 @@ function operate(num1, op, num2) {
     else if (op === "/") {
         result = divide(num1, num2);
     }
+
+    console.log("inside operate after calculation: " + calc);
     // if array has a length of 4 and last is another operator
     if (calc.length === 4 && typeof calc[3] === "string") {
         let updater = "";
         updater += result;
         updater += calc[3];
-        console.log("updater is: " + updater);
         expressionDisplay.textContent = updater;
         // expressionDisplay.textContent += calc[3];
         calc.shift();
@@ -213,36 +206,36 @@ function operate(num1, op, num2) {
         calc.shift();
         // add result to calc
         calc.unshift(result);
-        console.log("here now");
         keyPressedDisplay.textContent = result;
-        console.log("at position calc[1] is: " + calc[1]);
+        // console.log("at position in operate calc[0] is: " + calc[0]);
+        // console.log("at position in operate calc[1] is: " + calc[1]);
+        // console.log("at position in operate calc[2] is: " + calc[2]);
         return result;
     }
-    // // if calc[3] is the equals sign, enpty array add result
+    // if calc[3] is the equals sign, enpty array add result
     else if(calc.length === 3) {
         calc.length = 0;
         calc.push(result);
-        console.log("made it here!")
         keyPressedDisplay.textContent = result;
         expressionDisplay.textContent = result;
         return result;
     }
-    
 }
 
 function populateDisplay(input) {
 	let op = "";
     // remove default zero from keyPressedDisplay
     if (keyPressedDisplay.textContent.charAt(0) === "0") {
-			console.log("we are now here");
-			keyPressedDisplay.textContent = "";
-	}
-	switch (input) {
+        console.log("populate display");
+        keyPressedDisplay.textContent = "";
+    }
+    console.log("input is: " + input);
+    switch (input) {
 		case "+":
 		case "-":
 		case "*":
 		case "/":
-            op = input;
+            // op = input;
             // add input to expression string
             expressionDisplay.textContent += input;
             // push whats in display string so far to calc array for double digit + numbers
@@ -255,10 +248,10 @@ function populateDisplay(input) {
 			break;
         case "=":
             calc.push(displayString);
-            console.log("calc[0] is: " + calc[0]);
-            console.log("calc[1] is: " + calc[1]);
-            console.log("calc[2] is: " + calc[2]);
-			operate(calc[0], calc[1], calc[2]);
+            console.log("inside switch calc[0] is: " + calc[0]);
+            console.log("inside switch calc[1] is: " + calc[1]);
+            console.log("inside switch calc[2] is: " + calc[2]);
+            operate(calc[0], calc[1], calc[2]);
             break;
         case ".":
             expressionDisplay.textContent += input;
@@ -267,29 +260,35 @@ function populateDisplay(input) {
         // if the input is a number
         default:
             expressionDisplay.textContent += input;
-            // check if first is 0, if so trim
-            // if (keyPressedDisplay.textContent.charAt(0) === "0") {
-            //     console.log("we are now here");
-            //     keyPressedDisplay.textContent = "";
-            // }
+            if (typeof calc[1] === "string") {
+                console.log("i got here");
+                keyPressedDisplay.textContent = "";
+            }
             keyPressedDisplay.textContent += input;
             displayExpression += input;
             displayString += input;
-	}
-    console.log("calc contains: " + calc);
-	//if calc has a length of 3
-	if (calc.length === 4) {
-		// check if operand is in the middle call operate
-		if (
-			typeof calc[0] === "number" &&
-			typeof calc[1] === "string" &&
-			typeof calc[2] === "number"
-        ) {
-            console.log("here");
-			const x = operate(calc[0], calc[1], calc[2]);
-            // displayString.textContent = x;
-            // expressionDisplay.textContent = x;
-            console.log("here again");
-        }   
     }
+
+    if (calc.length === 4) {
+        const x = operate(calc[0], calc[1], calc[2]);
+        console.log(calc);
+        // keyPressedDisplay.textContent = "";
+    }
+	//if calc has a length of 3
+    // if (calc.length === 4) {
+    //     console.log("inside function i need to be in!");
+	// 	// check if operand is in the middle call operate
+	// 	if (
+	// 		typeof calc[0] === "number" &&
+	// 		typeof calc[1] === "string" &&
+    //         typeof calc[2] === "number" &&
+    //         typeof calc[3] === "string"
+    //     ) {
+    //         console.log("here");
+	// 		const x = operate(calc[0], calc[1], calc[2]);
+    //         // displayString.textContent = x;
+    //         // expressionDisplay.textContent = x;
+    //         console.log("here again");
+    //     }   
+    // }
 }
