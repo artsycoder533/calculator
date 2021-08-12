@@ -139,7 +139,8 @@ btnBackspace.addEventListener('click', () => {
 function add(a, b) {
     console.log("first num: " + a);
     console.log("second num: " + b);
-    let result = parseInt(a) + parseInt(b);
+    // let result = parseInt(a) + parseInt(b);
+    let result = parseFloat(a) + parseFloat(b);
     console.log("in add: " + result);
     console.log("in add calc is: " + calc);
 	console.log("in add returned: " + result);
@@ -148,7 +149,8 @@ function add(a, b) {
 
 //subtract
 function subtract(a, b){
-    let result = parseInt(a) - parseInt(b);
+    // let result = parseInt(a) - parseInt(b);
+    let result = parseFloat(a) - parseFloat(b);
     console.log("in subtract: " + result);
     console.log("in subtract calc is: " + calc);
 	console.log("in subtract returned: " + result);
@@ -157,7 +159,8 @@ function subtract(a, b){
 
 //multiply
 function multiply(a, b){
-    let result = parseInt(a) * parseInt(b);
+    // let result = parseInt(a) * parseInt(b);
+    let result = parseFloat(a) * parseFloat(b);
     console.log("in multiply: " + result);
     console.log("in multiply calc is: " + calc);
     console.log("in multiply returned: " + result);
@@ -170,7 +173,8 @@ function divide(a, b){
     if(b === 0){
         return 'ERROR';
     }
-    let result = parseInt(a) / parseInt(b);
+    // let result = parseInt(a) / parseInt(b);
+    let result = parseFloat(a) / parseFloat(b);
     console.log("in divide: " + result);
     console.log("in divide calc is: " + calc);
 	console.log("in divide returned: " + calc[0]);
@@ -239,6 +243,7 @@ function populateDisplay(input) {
                 break;
             }
             // add input to expression string
+            displayExpression += input;
             expressionDisplay.textContent += input;
             // push whats in display string so far to calc array for double digit + numbers
             calc.push(displayString);
@@ -253,6 +258,13 @@ function populateDisplay(input) {
             operate(calc[0], calc[1], calc[2]);
             break;
         case ".":
+            // check if user already pressed a decimal
+            // displayExpression += input;
+            console.log("last char is: " + displayExpression.charAt(length - 1));
+            if (displayExpression.includes(".")) {
+                break;
+            }
+            displayExpression += input;
             expressionDisplay.textContent += input;
             // keyPressedDisplay.textContent += input;
             displayString += input;
