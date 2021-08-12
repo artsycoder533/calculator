@@ -260,6 +260,10 @@ function populateDisplay(input) {
             }
 			break;
         case "=":
+            // check if theres an number followed by an operator in calc
+            if (calc.length < 3) {
+                break;
+            }
             calc.push(displayString);
             operate(calc[0], calc[1], calc[2]);
             break;
