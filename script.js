@@ -105,8 +105,8 @@ btnClear.addEventListener('click', () => {
 //add
 function add(a, b){
     let result = parseInt(a) + parseInt(b);
-    calc.length = 0;
-    calc.push(result);
+    // calc.length = 0;
+    // calc.push(result);
     console.log("in add: " + result);
     console.log("in add calc is: " + calc);
 	console.log("in add returned: " + calc[0]);
@@ -116,8 +116,8 @@ function add(a, b){
 //subtract
 function subtract(a, b){
     let result = parseInt(a) - parseInt(b);
-    calc.length = 0;
-    calc.push(result);
+    // calc.length = 0;
+    // calc.push(result);
     console.log("in subtract: " + result);
     console.log("in subtract calc is: " + calc);
 	console.log("in subtract returned: " + calc[0]);
@@ -127,8 +127,8 @@ function subtract(a, b){
 //multiply
 function multiply(a, b){
     let result = parseInt(a) * parseInt(b);
-    calc.length = 0;
-    calc.push(result);
+    // calc.length = 0;
+    // calc.push(result);
     console.log("in multiply: " + result);
     console.log("in multiply calc is: " + calc);
     console.log("in multiply returned: " + calc[0]);
@@ -142,8 +142,8 @@ function divide(a, b){
         return 'ERROR';
     }
     let result = parseInt(a) / parseInt(b);
-    calc.length = 0;
-    calc.push(result);
+    // calc.length = 0;
+    // calc.push(result);
     console.log("in divide: " + result);
     console.log("in divide calc is: " + calc);
 	console.log("in divide returned: " + calc[0]);
@@ -165,13 +165,27 @@ function operate(num1, op, num2) {
     else if (op === "/") {
         result = divide(num1, num2);
     }
-    // clear calc array
-    calc.length = 0;
-    // add result to calc
-    calc.push(result);
-    keyPressedDisplay.textContent = result;
-    expressionDisplay.textContent = result;
-    return result;
+    // if array has a length of 4 and last is another operator
+    if (calc.length === 4 && typeof calc[3] === "string") {
+        expressionDisplay.textContent = calc[3];
+        calc.shift();
+        calc.shift();
+        calc.shift();
+        // add result to calc
+        calc.unshift(result);
+        keyPressedDisplay.textContent = result;
+        expressionDisplay.textContent = result;
+        return result;
+    }
+    // if calc[3] is the equals sign, enpty array add result
+    else {
+        calc.length = 0;
+        calc.push(result);
+        keyPressedDisplay.textContent = result;
+        expressionDisplay.textContent = result;
+        return result;
+    }
+    
 }
 
 function populateDisplay(input) {
