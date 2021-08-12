@@ -109,8 +109,8 @@ function add(a, b){
     // calc.push(result);
     console.log("in add: " + result);
     console.log("in add calc is: " + calc);
-	console.log("in add returned: " + calc[0]);
-    return calc[0];
+	console.log("in add returned: " + result);
+    return result;
 }
 
 //subtract
@@ -120,8 +120,8 @@ function subtract(a, b){
     // calc.push(result);
     console.log("in subtract: " + result);
     console.log("in subtract calc is: " + calc);
-	console.log("in subtract returned: " + calc[0]);
-    return calc[0];
+	console.log("in subtract returned: " + result);
+    return result;
 }
 
 //multiply
@@ -131,8 +131,8 @@ function multiply(a, b){
     // calc.push(result);
     console.log("in multiply: " + result);
     console.log("in multiply calc is: " + calc);
-    console.log("in multiply returned: " + calc[0]);
-    return calc[0];
+    console.log("in multiply returned: " + result);
+    return result;
     
 }
 
@@ -147,7 +147,7 @@ function divide(a, b){
     console.log("in divide: " + result);
     console.log("in divide calc is: " + calc);
 	console.log("in divide returned: " + calc[0]);
-    return calc[0];
+    return result;
 }
 
 //operate
@@ -167,24 +167,31 @@ function operate(num1, op, num2) {
     }
     // if array has a length of 4 and last is another operator
     if (calc.length === 4 && typeof calc[3] === "string") {
-        expressionDisplay.textContent = calc[3];
+        let updater = "";
+        updater += result;
+        updater += calc[1];
+        console.log("updater is: " + updater);
+        expressionDisplay.textContent = updater;
+        // expressionDisplay.textContent += calc[3];
         calc.shift();
         calc.shift();
         calc.shift();
         // add result to calc
         calc.unshift(result);
+        console.log("here now");
         keyPressedDisplay.textContent = result;
-        expressionDisplay.textContent = result;
+        console.log("at position calc[1] is: " + calc[1]);
         return result;
     }
-    // if calc[3] is the equals sign, enpty array add result
-    else {
-        calc.length = 0;
-        calc.push(result);
-        keyPressedDisplay.textContent = result;
-        expressionDisplay.textContent = result;
-        return result;
-    }
+    // // if calc[3] is the equals sign, enpty array add result
+    // else {
+    //     calc.length = 0;
+    //     calc.push(result);
+    //     console.log("calc[3] is an operator here!")
+    //     keyPressedDisplay.textContent = result + calc[3];
+    //     expressionDisplay.textContent = result;
+    //     return result;
+    // }
     
 }
 
@@ -217,25 +224,33 @@ function populateDisplay(input) {
 			typeof calc[0] === "number" &&
 			typeof calc[1] === "string" &&
 			typeof calc[2] === "number"
-		) {
+        ) {
+            console.log("here");
 			const x = operate(calc[0], calc[1], calc[2]);
-			displayString.textContent = x;
-        }
-    //    
+            // displayString.textContent = x;
+            // expressionDisplay.textContent = x;
+            console.log("here again");
+        }   
     }
-    else if (calc.length === 4 && typeof calc[3] === "string") {
-        calc.push(calc[3]);
-        console.log("if continued expression, calc contains: " + calc);
 
 
-	}
-	// if calc[0] is a number and the next number pushed is a number
-    else if (typeof calc[0] === "number" && typeof calc[1] === "number") {
-        // remove the first element(result from previous calculation)
-        calc.shift();
-        // remove first number from expression Display
-        expressionDisplay.textContent = input;
-    }
+    // else if (calc.length === 4 && typeof calc[3] === "string") {
+    //     console.log("if continued expression, calc contains: " + calc);
+    //     calc.push(calc[3]);
+        
+
+
+	// }
+	// // if calc[0] is a number and the next number pushed is a number
+    // else if (typeof calc[0] === "number" && typeof calc[1] === "number") {
+    //     // remove the first element(result from previous calculation)
+    //     calc.shift();
+    //     // remove first number from expression Display
+    //     expressionDisplay.textContent += calc[3];
+    //     expressionDisplay.textContent = input;
+    //     console.log("hereeee");
+        
+    // }
     // else if (dfdf) {
         
     // }
