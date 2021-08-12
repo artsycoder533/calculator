@@ -71,7 +71,11 @@ btnNine.addEventListener('click', () => {
 
 btnZero.addEventListener('click', () => {
     populateDisplay(0);
-})
+});
+
+btnDecimal.addEventListener('click', () => {
+    populateDisplay(".");
+});
 
 
 // EVENT LISTENERS - OPERATORS
@@ -123,7 +127,7 @@ btnBackspace.addEventListener('click', () => {
 			expressionDisplay.textContent = expressionDisplay.textContent.slice(0, -1);
 		}
 		// if more than one number delete last number added
-		else if (keyPressedDisplay.length > 1) {
+		else if (keyPressedDisplay.textContent.length > 1) {
 			console.log("inside backspace else");
 			keyPressedDisplay.textContent = keyPressedDisplay.textContent.slice(0, -1);
 			expressionDisplay.textContent = expressionDisplay.textContent.slice(0, -1);
@@ -247,7 +251,7 @@ function populateDisplay(input) {
             displayString = "";
             keyPressedDisplay.textContent = "";
             // push the operator to calc array
-			calc.push(op);
+			calc.push(input);
 			break;
         case "=":
             calc.push(displayString);
