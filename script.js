@@ -18,6 +18,7 @@ const btnSix = document.querySelector('.six');
 const btnSeven = document.querySelector('.seven');
 const btnEight = document.querySelector('.eight');
 const btnNine = document.querySelector('.nine');
+const btnZero = document.querySelector('.zero');
 const btnDecimal = document.querySelector('.decimal');
 
 //operator buttons
@@ -67,6 +68,10 @@ btnEight.addEventListener('click', () => {
 btnNine.addEventListener('click', () => {
     populateDisplay(9);
 });
+
+btnZero.addEventListener('click', () => {
+    populateDisplay(0);
+})
 
 
 // EVENT LISTENERS - OPERATORS
@@ -127,7 +132,9 @@ btnBackspace.addEventListener('click', () => {
 
 //FUNCTIONS
 //add
-function add(a, b){
+function add(a, b) {
+    console.log("first num: " + a);
+    console.log("second num: " + b);
     let result = parseInt(a) + parseInt(b);
     // calc.length = 0;
     // calc.push(result);
@@ -221,14 +228,25 @@ function operate(num1, op, num2) {
 
 function populateDisplay(input) {
 	let op = "";
-
+    // remove default zero from keyPressedDisplay
+    if (keyPressedDisplay.textContent.charAt(0) === "0") {
+			console.log("we are now here");
+			keyPressedDisplay.textContent = "";
+	}
 	switch (input) {
 		case "+":
 		case "-":
 		case "*":
 		case "/":
-			op = input;
-			expressionDisplay.textContent += input;
+            op = input;
+            // add input to expression string
+            expressionDisplay.textContent += input;
+            // push whats in display string so far to calc array for double digit + numbers
+            calc.push(displayString);
+            // once an operator is pressed clear display string
+            displayString = "";
+            keyPressedDisplay.textContent = "";
+            // push the operator to calc array
 			calc.push(op);
 			break;
 		case "=":
@@ -238,14 +256,19 @@ function populateDisplay(input) {
             expressionDisplay.textContent += input;
             keyPressedDisplay.textContent += input;
             break;
-        
-		default:
-			expressionDisplay.textContent += input;
-			keyPressedDisplay.textContent = input;
-			displayExpression += input;
-			calc.push(input);
+        // if the input is a number
+        default:
+            expressionDisplay.textContent += input;
+            // check if first is 0, if so trim
+            // if (keyPressedDisplay.textContent.charAt(0) === "0") {
+            //     console.log("we are now here");
+            //     keyPressedDisplay.textContent = "";
+            // }
+            keyPressedDisplay.textContent += input;
+            displayExpression += input;
+            displayString += input;
 	}
-	console.log("calc contains: " + calc);
+    console.log("calc contains: " + calc);
 	//if calc has a length of 3
 	if (calc.length === 4) {
 		// check if operand is in the middle call operate
