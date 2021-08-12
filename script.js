@@ -226,7 +226,6 @@ function populateDisplay(input) {
 	let op = "";
     // remove default zero from keyPressedDisplay
     if (keyPressedDisplay.textContent.charAt(0) === "0") {
-        console.log("populate display");
         keyPressedDisplay.textContent = "";
     }
     console.log("input is: " + input);
@@ -235,7 +234,10 @@ function populateDisplay(input) {
 		case "-":
 		case "*":
 		case "/":
-            // op = input;
+            // in calc length is 2 check and 2nd element is already a operator break.
+            if (calc.length === 2 && typeof calc[1] === "string") {
+                break;
+            }
             // add input to expression string
             expressionDisplay.textContent += input;
             // push whats in display string so far to calc array for double digit + numbers
@@ -248,9 +250,9 @@ function populateDisplay(input) {
 			break;
         case "=":
             calc.push(displayString);
-            console.log("inside switch calc[0] is: " + calc[0]);
-            console.log("inside switch calc[1] is: " + calc[1]);
-            console.log("inside switch calc[2] is: " + calc[2]);
+            // console.log("inside switch calc[0] is: " + calc[0]);
+            // console.log("inside switch calc[1] is: " + calc[1]);
+            // console.log("inside switch calc[2] is: " + calc[2]);
             operate(calc[0], calc[1], calc[2]);
             break;
         case ".":
@@ -260,13 +262,26 @@ function populateDisplay(input) {
         // if the input is a number
         default:
             expressionDisplay.textContent += input;
-            if (typeof calc[1] === "string") {
+            console.log("calc contains: " + calc);
+            if (calc.length === 3 && typeof calc[1] === "string") {
                 console.log("i got here");
+                console.log("displayString in 1st if: " + displayString);
+                console.log("keyPressedDisplay in 1st if: " + keyPressedDisplay.textContent);
                 keyPressedDisplay.textContent = "";
             }
-            keyPressedDisplay.textContent += input;
-            displayExpression += input;
+            else if (calc.length === 2 && typeof calc[1] === "string") {
+                console.log("i got here this time");
+                console.log("displayString in 2nd if: " + displayString);
+                console.log("keyPressedDisplay in 2nd if: " + keyPressedDisplay.textContent);
+                keyPressedDisplay.textContent = "";
+            }
             displayString += input;
+            console.log("displayString is outside of ifs: " + displayString);
+            console.log("keyPressedDisplay outside of ifs: " + keyPressedDisplay.textContent);
+            // keyPressedDisplay.textContent += input;
+            keyPressedDisplay.textContent = displayString;
+            displayExpression += input;
+            
     }
 
     if (calc.length === 4) {
@@ -274,21 +289,4 @@ function populateDisplay(input) {
         console.log(calc);
         // keyPressedDisplay.textContent = "";
     }
-	//if calc has a length of 3
-    // if (calc.length === 4) {
-    //     console.log("inside function i need to be in!");
-	// 	// check if operand is in the middle call operate
-	// 	if (
-	// 		typeof calc[0] === "number" &&
-	// 		typeof calc[1] === "string" &&
-    //         typeof calc[2] === "number" &&
-    //         typeof calc[3] === "string"
-    //     ) {
-    //         console.log("here");
-	// 		const x = operate(calc[0], calc[1], calc[2]);
-    //         // displayString.textContent = x;
-    //         // expressionDisplay.textContent = x;
-    //         console.log("here again");
-    //     }   
-    // }
 }
