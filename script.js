@@ -104,8 +104,25 @@ btnClear.addEventListener('click', () => {
 });
 
 btnBackspace.addEventListener('click', () => {
+    console.log("backspace clicked");
+    console.log(keyPressedDisplay.textContent.length);
+    console.log(expressionDisplay.textContent.length)
     //delete one digit from keyPressedDisplay
-    //delete one digit/operator from expressionDisplay
+    // if only one number make key pressed display say 0
+    if (
+			keyPressedDisplay.textContent.length === 1 &&
+			expressionDisplay.textContent.length
+		) {
+			console.log("inside backspace if");
+			keyPressedDisplay.textContent = "0";
+			expressionDisplay.textContent = expressionDisplay.textContent.slice(0, -1);
+		}
+		// if more than one number delete last number added
+		else if (keyPressedDisplay.length > 1) {
+			console.log("inside backspace else");
+			keyPressedDisplay.textContent = keyPressedDisplay.textContent.slice(0, -1);
+			expressionDisplay.textContent = expressionDisplay.textContent.slice(0, -1);
+		}
 });
 
 //FUNCTIONS
