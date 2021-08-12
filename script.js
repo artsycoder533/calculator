@@ -18,6 +18,7 @@ const btnSix = document.querySelector('.six');
 const btnSeven = document.querySelector('.seven');
 const btnEight = document.querySelector('.eight');
 const btnNine = document.querySelector('.nine');
+const btnDecimal = document.querySelector('.decimal');
 
 //operator buttons
 const btnAdd = document.querySelector(`.add`);
@@ -28,6 +29,7 @@ const btnEquals = document.querySelector(`.equals`);
 
 //accessory buttons
 const btnClear = document.querySelector(`.clear`);
+const btnBackspace = document.querySelector('.backspace')
 
 //EVENT LISTENERS - DIGITS
 btnOne.addEventListener('click', () => {
@@ -101,6 +103,11 @@ btnClear.addEventListener('click', () => {
     calc.length = 0;
 });
 
+btnBackspace.addEventListener('click', () => {
+    //delete one digit from keyPressedDisplay
+    //delete one digit/operator from expressionDisplay
+});
+
 //FUNCTIONS
 //add
 function add(a, b){
@@ -169,7 +176,7 @@ function operate(num1, op, num2) {
     if (calc.length === 4 && typeof calc[3] === "string") {
         let updater = "";
         updater += result;
-        updater += calc[1];
+        updater += calc[3];
         console.log("updater is: " + updater);
         expressionDisplay.textContent = updater;
         // expressionDisplay.textContent += calc[3];
@@ -184,14 +191,14 @@ function operate(num1, op, num2) {
         return result;
     }
     // // if calc[3] is the equals sign, enpty array add result
-    // else {
-    //     calc.length = 0;
-    //     calc.push(result);
-    //     console.log("calc[3] is an operator here!")
-    //     keyPressedDisplay.textContent = result + calc[3];
-    //     expressionDisplay.textContent = result;
-    //     return result;
-    // }
+    else if(calc.length === 3) {
+        calc.length = 0;
+        calc.push(result);
+        console.log("made it here!")
+        keyPressedDisplay.textContent = result;
+        expressionDisplay.textContent = result;
+        return result;
+    }
     
 }
 
@@ -209,7 +216,12 @@ function populateDisplay(input) {
 			break;
 		case "=":
 			operate(calc[0], calc[1], calc[2]);
-			break;
+            break;
+        case ".":
+            expressionDisplay.textContent += input;
+            keyPressedDisplay.textContent += input;
+            break;
+        
 		default:
 			expressionDisplay.textContent += input;
 			keyPressedDisplay.textContent = input;
@@ -232,38 +244,4 @@ function populateDisplay(input) {
             console.log("here again");
         }   
     }
-
-
-    // else if (calc.length === 4 && typeof calc[3] === "string") {
-    //     console.log("if continued expression, calc contains: " + calc);
-    //     calc.push(calc[3]);
-        
-
-
-	// }
-	// // if calc[0] is a number and the next number pushed is a number
-    // else if (typeof calc[0] === "number" && typeof calc[1] === "number") {
-    //     // remove the first element(result from previous calculation)
-    //     calc.shift();
-    //     // remove first number from expression Display
-    //     expressionDisplay.textContent += calc[3];
-    //     expressionDisplay.textContent = input;
-    //     console.log("hereeee");
-        
-    // }
-    // else if (dfdf) {
-        
-    // }
 }
-
-
-// add(1, 2);
-// subtract(10, 2);
-// multiply(2, 3);
-// divide(9, 3);
-// operate(2, 3, '+');
-// operate(3,2, '-');
-// operate(3,3, '*');
-// operate(3,0, '/');
-// operate(9,3, '/');
-// operate(2,3,'$'); 
