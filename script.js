@@ -151,74 +151,145 @@ function divide(a, b){
 }
 
 //operate
-function operate(arr) {
-    console.log(arr);
-    let x = arr[0];
-    let operator = arr[1];
-    let y = arr[2];
-    switch (operator) {
-        case "+":
-            displayString = add(x, y);
-            keyPressedDisplay.textContent = displayString;
-            return displayString;
-            break;
-        case "-":
-            displayString = subtract(x, y);
-            keyPressedDisplay.textContent = displayString;
-			return displayString;
-            break;
-        case "*":
-            displayString = multiply(x, y);
-            keyPressedDisplay.textContent = displayString;
-			return displayString;
-            break;
-        case "/":
-            displayString = divide(x, y);
-            keyPressedDisplay.textContent = displayString;
-			return displayString;
-            break;
-        default:
-            return x;
+function operate(num1, op, num2) {
+    let result = 0;
+    if (op === "+") {
+        result = add(num1, num2);
     }
+    else if (op === "-") {
+        result = subtract(num1, num2);
+    }
+    else if (op === "*") {
+        result =  multiply(num1, num2);
+    }
+    else if (op === "/") {
+        result = divide(num1, num2);
+    }
+    // clear calc array
+    calc.length = 0;
+    // add result to calc
+    calc.push(result);
+    keyPressedDisplay.textContent = result;
+    expressionDisplay.textContent = result;
+    return result;
 }
 
-function populateDisplay(num) {
-    let first = '';
-    let second = '';
-    let op = '';
 
-    switch (num) {
-        case '+':
-        case '-':
-        case '*':
-        case '/':
-            op = num;
-            displayExpression += num;
-            expressionDisplay.textContent = `${displayExpression}`;
-            calc.push(displayString);
-            calc.push(num);
-            displayString = '';
-            break;
-        case "=":
-            calc.push(displayString);
-            console.log(calc);
-            const result = operate(calc);
-            displayExpression = "";
-            expressionDisplay.textContent = `${displayExpression}`;
-            displayString = "";
-            //keyPressedDisplay.textContent = `${displayString}`; 
-            break;
-        default:
-            //if button pressed is a digit
-            //displays entire mathematical expression at the top of display
-            //displays the current digits pressed at the bottom of the display
-            displayExpression += num;
-            displayString += num;
-            console.log(displayString);
-            expressionDisplay.textContent = `${displayExpression}`;
-            keyPressedDisplay.textContent = `${displayString}`;
-    }
+// function operate(arr) {
+//     console.log(arr);
+//     let x = arr[0];
+//     let operator = arr[1];
+//     let y = arr[2];
+//     switch (operator) {
+//         case "+":
+//             displayString = add(x, y);
+//             keyPressedDisplay.textContent = displayString;
+//             return displayString;
+//             break;
+//         case "-":
+//             displayString = subtract(x, y);
+//             keyPressedDisplay.textContent = displayString;
+// 			return displayString;
+//             break;
+//         case "*":
+//             displayString = multiply(x, y);
+//             keyPressedDisplay.textContent = displayString;
+// 			return displayString;
+//             break;
+//         case "/":
+//             displayString = divide(x, y);
+//             keyPressedDisplay.textContent = displayString;
+// 			return displayString;
+//             break;
+//         default:
+//             return x;
+//     }
+// }
+
+function populateDisplay(input) {
+	let op = "";
+
+	switch (input) {
+		case "+":
+		case "-":
+		case "*":
+		case "/":
+			op = input;
+			expressionDisplay.textContent += input;
+			calc.push(op);
+			break;
+		case "=":
+			operate(calc[0], calc[1], calc[2]);
+			break;
+		default:
+			expressionDisplay.textContent += input;
+			keyPressedDisplay.textContent = input;
+			displayExpression += input;
+			calc.push(input);
+	}
+	console.log("calc contains: " + calc);
+	//if calc has a length of 3
+	if (calc.length === 4) {
+		// check if operand is in the middle call operate
+		if (
+			typeof calc[0] === "number" &&
+			typeof calc[1] === "string" &&
+			typeof calc[2] === "number"
+		) {
+			const x = operate(calc[0], calc[1], calc[2]);
+			displayString.textContent = x;
+		}
+    } else if (calc.length === 4 && typeof calc[3] === "string") {
+        
+	}
+	// if calc[0] is a number and the next number pushed is a number
+	
+    if (typeof calc[0] === "number" && typeof calc[1] === "number") {
+        // remove the first element(result from previous calculation)
+        calc.shift();
+        // remove first number from expression Display
+        expressionDisplay.textContent = input;
+	}
 }
+
+// function populateDisplay(num) {
+//     let first = '';
+//     let second = '';
+//     let op = '';
+
+//     switch (num) {
+//         case '+':
+//         case '-':
+//         case '*':
+//         case '/':
+//             op = num;
+//             displayExpression += num;
+//             expressionDisplay.textContent = `${displayExpression}`;
+//             calc.push(displayString);
+//             calc.push(num);
+//             console.log("inside populate Display calc: " + calc + calc.length);
+//             displayString = '';
+//             break;
+//         case "=":
+//             calc.push(displayString);
+//             console.log(calc);
+//             const result = operate(calc);
+//             displayExpression = "";
+//             expressionDisplay.textContent = `${displayExpression}`;
+//             displayString = "";
+//             //keyPressedDisplay.textContent = `${displayString}`; 
+//             break;
+//         default:
+//             //if button pressed is a digit
+//             //displays entire mathematical expression at the top of display
+//             //displays the current digits pressed at the bottom of the display
+//             displayExpression += num;
+//             displayString += num;
+//             console.log(displayString);
+//             expressionDisplay.textContent = `${displayExpression}`;
+//             keyPressedDisplay.textContent = `${displayString}`;
+//     }
+// }
 
 // add(1, 2);
 // subtract(10, 2);
