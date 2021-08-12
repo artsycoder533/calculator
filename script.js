@@ -250,14 +250,12 @@ function populateDisplay(input) {
 			break;
         case "=":
             calc.push(displayString);
-            // console.log("inside switch calc[0] is: " + calc[0]);
-            // console.log("inside switch calc[1] is: " + calc[1]);
-            // console.log("inside switch calc[2] is: " + calc[2]);
             operate(calc[0], calc[1], calc[2]);
             break;
         case ".":
             expressionDisplay.textContent += input;
-            keyPressedDisplay.textContent += input;
+            // keyPressedDisplay.textContent += input;
+            displayString += input;
             break;
         // if the input is a number
         default:
@@ -281,7 +279,6 @@ function populateDisplay(input) {
             // keyPressedDisplay.textContent += input;
             keyPressedDisplay.textContent = displayString;
             displayExpression += input;
-            
     }
 
     if (calc.length === 4) {
