@@ -231,7 +231,8 @@ function populateDisplay(input) {
                 break;
             }
             // add input to expression string
-            displayExpression += input;
+            // displayExpression += input;
+            displayExpression = "";
             expressionDisplay.textContent += input;
             // push whats in display string so far to calc array for double digit + numbers
             calc.push(displayString);
@@ -246,10 +247,22 @@ function populateDisplay(input) {
             break;
         case "+/-":
             // multiply by -1
+            // stop user from pressing this button before a number
+            if (displayString.length === 0) {
+                break;
+            }
             displayString = parseFloat(displayString * (-1));
             keyPressedDisplay.textContent = parseFloat(keyPressedDisplay.textContent * -1);
-            displayExpression = parseFloat(displayExpression * (-1));
-            expressionDisplay.textContent = parseFloat(expressionDisplay.textContent * -1);
+            displayExpression = parseFloat(displayExpression * -1);
+
+            // if number youre negating isnt the first number in the operation
+            if (calc.length > 0) {
+                expressionDisplay.textContent = calc[0] + calc[1] + displayExpression;
+                break;
+            }
+            else {
+                expressionDisplay.textContent = displayExpression;
+            }
             break;
         case "=":
             // check if theres a number followed by an operator in calc
