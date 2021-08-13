@@ -63,17 +63,23 @@ body {
     background-color: lightgray
 }
 
+.equals {
+    width: 125px;
+    border-radius: 25px;
+    grid-column: 3 / 5;
+}
+
 .btn:hover {
     opacity: 0.5;
     box-shadow: 2px 1px black;
 }
 
-.divide, .multiply, .subtract, .add, .equals, .backspace {
+.divide, .multiply, .subtract, .add, .equals {
     background-color: gold;
     box-shadow: inset 2px 2px 2px 2px goldenrod;
 }
 
-.clear, .negative, .percent {
+.clear, .negative, .percent, .backspace {
     background-color: lightseagreen;
     box-shadow: inset 2px 2px 2px 2px seagreen;
 }

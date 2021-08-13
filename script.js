@@ -142,6 +142,7 @@ btnNegative.addEventListener('click', () => {
     populateDisplay("+/-");
 });
 
+
 //FUNCTIONS
 //add
 function add(a, b) {
