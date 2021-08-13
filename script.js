@@ -30,7 +30,9 @@ const btnEquals = document.querySelector(`.equals`);
 
 //accessory buttons
 const btnClear = document.querySelector(`.clear`);
-const btnBackspace = document.querySelector('.backspace')
+const btnBackspace = document.querySelector('.backspace');
+const btnNegative = document.querySelector('.negative');
+const btnPercent = document.querySelector(".percent");
 
 //EVENT LISTENERS - DIGITS
 btnOne.addEventListener('click', () => {
@@ -134,6 +136,10 @@ btnBackspace.addEventListener('click', () => {
         displayString = displayString.slice(0, -1);
         // console.log("displayString is inside backspace else: " + displayString);
     }
+});
+
+btnNegative.addEventListener('click', () => {
+    populateDisplay("+/-");
 });
 
 //FUNCTIONS
@@ -258,7 +264,14 @@ function populateDisplay(input) {
             if (calc.indexOf(input) === 3) {
                 calc.shift();
             }
-			break;
+            break;
+        case "+/-":
+            // multiply by -1
+            displayString = parseFloat(displayString * (-1));
+            keyPressedDisplay.textContent = parseFloat(keyPressedDisplay.textContent * -1);
+            displayExpression = parseFloat(displayExpression * (-1));
+            expressionDisplay.textContent = parseFloat(expressionDisplay.textContent * -1);
+            break;
         case "=":
             // check if theres an number followed by an operator in calc
             if (calc.length < 3) {
