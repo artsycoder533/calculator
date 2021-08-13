@@ -169,6 +169,10 @@ function divide(a, b){
 
 //operate
 function operate(num1, op, num2) {
+    console.log("calc contains: " + calc);
+    console.log("num1: " + num1);
+    console.log("op: " + op);
+    console.log("num2: " + num2);
     let result = 0;
     if (op === "+") {
         result = add(num1, num2);
@@ -195,16 +199,25 @@ function operate(num1, op, num2) {
         // add result to calc
         calc.unshift(result);
         keyPressedDisplay.textContent = result;
+        displayExpression = "";
+        displayString = "";
+        console.log("first result: " + result);
         return result;
     }
     // if calc[3] is the equals sign, enpty array add result
     else if(calc.length === 3) {
         calc.length = 0;
         calc.push(result);
+        calc.shift();
         keyPressedDisplay.textContent = result;
-        expressionDisplay.textContent = result;
+        expressionDisplay.textContent = "";
+        displayExpression = "";
+        displayString = "";
+        console.log("second result: " + result);
         return result;
     }
+    console.log("last result is: " + result);
+    return result;
 }
 
 function populateDisplay(input) {
@@ -213,12 +226,18 @@ function populateDisplay(input) {
     if (keyPressedDisplay.textContent.charAt(0) === "0") {
         keyPressedDisplay.textContent = "";
     }
+ 
+    console.log("input is: " + input);
 
     switch (input) {
 		case "+":
 		case "-":
 		case "*":
-		case "/":
+        case "/":
+            // check if user tries to enter operator first
+            if (displayString.length === 0) {
+                break;
+            }
             // add input to expression string
             displayExpression += input;
             expressionDisplay.textContent += input;
