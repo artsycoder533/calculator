@@ -169,10 +169,6 @@ function divide(a, b){
 
 //operate
 function operate(num1, op, num2) {
-    console.log("calc contains: " + calc);
-    console.log("num1: " + num1);
-    console.log("op: " + op);
-    console.log("num2: " + num2);
     let result = 0;
     if (op === "+") {
         result = add(num1, num2);
@@ -199,11 +195,9 @@ function operate(num1, op, num2) {
         calc.shift();
         // add result to calc
         calc.unshift(result);
-        console.log("calc contains after operation: " + calc);
         keyPressedDisplay.textContent = result;
         displayExpression = "";
         displayString = "";
-        console.log("first result: " + result);
         return result;
     }
     // if calc[3] is the equals sign, enpty array add result
@@ -215,10 +209,8 @@ function operate(num1, op, num2) {
         expressionDisplay.textContent = "";
         displayExpression = "";
         displayString = "";
-        console.log("second result: " + result);
         return result;
     }
-    console.log("last result is: " + result);
     return result;
 }
 
@@ -228,8 +220,6 @@ function populateDisplay(input) {
     if (keyPressedDisplay.textContent.charAt(0) === "0") {
         keyPressedDisplay.textContent = "";
     }
- 
-    console.log("input is: " + input);
 
     switch (input) {
 		case "+":
@@ -281,18 +271,19 @@ function populateDisplay(input) {
         
         // if the input is a number
         default:
-        expressionDisplay.textContent += input;
+            expressionDisplay.textContent += input;
+            
         if (calc.length === 3 && typeof calc[1] === "string") {
             keyPressedDisplay.textContent = "";
         }
+            
         else if (calc.length === 2 && typeof calc[1] === "string") {
             keyPressedDisplay.textContent = "";
         }
-
+            
         else if (calc.length === 4 && typeof calc[1] === "number") {
             calc.shift();
         }
-            
         displayString += input;
         keyPressedDisplay.textContent = displayString;
         displayExpression += input;
@@ -303,4 +294,5 @@ function populateDisplay(input) {
     }
 }
 
+// update copyright year
 date.innerHTML = new Date().getFullYear();
