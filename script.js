@@ -193,11 +193,13 @@ function operate(num1, op, num2) {
         updater += result;
         updater += calc[3];
         expressionDisplay.textContent = updater;
+        // remove operands and operator from previous calculation
         calc.shift();
         calc.shift();
         calc.shift();
         // add result to calc
         calc.unshift(result);
+        console.log("calc contains after operation: " + calc);
         keyPressedDisplay.textContent = result;
         displayExpression = "";
         displayString = "";
@@ -248,9 +250,9 @@ function populateDisplay(input) {
             keyPressedDisplay.textContent = "";
             // push the operator to calc array
             calc.push(input);
-            if (calc.indexOf(input) === 3) {
-                calc.shift();
-            }
+            // if (calc.indexOf(input) === 3) {
+            //     calc.shift();
+            // }
             break;
         case "+/-":
             // multiply by -1
