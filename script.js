@@ -215,7 +215,7 @@ function populateDisplay(input) {
     if (keyPressedDisplay.textContent.charAt(0) === "0") {
         keyPressedDisplay.textContent = "";
     }
-    console.log("input is: " + input);
+
     switch (input) {
 		case "+":
 		case "-":
@@ -226,7 +226,6 @@ function populateDisplay(input) {
             expressionDisplay.textContent += input;
             // push whats in display string so far to calc array for double digit + numbers
             calc.push(displayString);
-            
             // once an operator is pressed clear display string
             displayString = "";
             keyPressedDisplay.textContent = "";
@@ -244,8 +243,8 @@ function populateDisplay(input) {
             expressionDisplay.textContent = parseFloat(expressionDisplay.textContent * -1);
             break;
         case "=":
-            // check if theres an number followed by an operator in calc
-            if (calc.length < 3) {
+            // check if theres a number followed by an operator in calc
+            if (calc.length < 3 && typeof calc[1] !== "string") {
                 break;
             }
             calc.push(displayString);
