@@ -38,8 +38,8 @@ body {
 }
 
 .display {
-   width: 95%;
-   color: lightgray;
+    width: 95%;
+    color: lightgray;
 }
 
 .calc {
@@ -60,7 +60,8 @@ body {
     margin: auto;
     font-size: 25px;
     box-shadow: inset 2px 2px 2px 2px darkgray;
-    background-color: lightgray
+    background-color: lightgray;
+    cursor: pointer;
 }
 
 .equals {
@@ -70,8 +71,8 @@ body {
 }
 
 .btn:hover {
-    opacity: 0.5;
-    box-shadow: 2px 1px black;
+    opacity: 0.8;
+    box-shadow: inset 2px 2px 2px 2px black;
 }
 
 .divide, .multiply, .subtract, .add, .equals {
