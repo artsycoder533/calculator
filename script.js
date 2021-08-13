@@ -120,11 +120,9 @@ btnBackspace.addEventListener('click', () => {
     //delete one digit from keyPressedDisplay
     // if only one number make key pressed display say 0
     if (keyPressedDisplay.textContent.length === 1 ) {
-        // console.log("inside backspace if");
         keyPressedDisplay.textContent = "0";
         expressionDisplay.textContent = expressionDisplay.textContent.slice(0, -1);
         displayString = "";
-        // console.log("displayString is inside backspace if: " + displayString);
 	}
     // if more than one number delete last number added
     else if (keyPressedDisplay.textContent.length > 1) {
